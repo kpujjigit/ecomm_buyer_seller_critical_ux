@@ -47,8 +47,16 @@ Sentry.init({
   release: process.env.SENTRY_RELEASE || 'marketplace-web@demo',
   environment: process.env.SENTRY_ENVIRONMENT || 'demo',
   tracesSampleRate: 1.0,
-  // The simulator runs standalone; opt into OTel-less mode for fewer deps.
-  skipOpenTelemetrySetup: true,
+  // NOTE: Do NOT set skipOpenTelemetrySetup here. In @sentry/node v8+,
+  // Sentry.startSpan() is backed by OpenTelemetry — skipping the OTel setup
+  // silently drops every span while letting errors still flow. Keeping OTel
+  // enabled is what makes the simulator's performance data actually land.
+  // Turn off the default HTTP auto-instrumentation to avoid noise from the
+  // ingest connection itself showing up as spans.
+  integrations: (defaults) =>
+    defaults.filter(
+      (integ) => integ.name !== 'Http' && integ.name !== 'NodeFetch',
+    ),
 });
 
 // ---------- Config ----------
