@@ -1,0 +1,28 @@
+{
+  "name": "sentry-ecommerce-spans-demo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sample app demonstrating Sentry custom span attributes for a C2C marketplace (buyer/seller journeys)",
+  "scripts": {
+    "dev": "next dev -p 3030",
+    "build": "next build",
+    "start": "next start -p 3030",
+    "simulate": "tsx scripts/simulate.ts",
+    "simulate:burst": "tsx scripts/simulate.ts --burst",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@sentry/nextjs": "^8.45.0",
+    "@sentry/node": "^8.45.0",
+    "next": "^14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.3"
+  }
+}
